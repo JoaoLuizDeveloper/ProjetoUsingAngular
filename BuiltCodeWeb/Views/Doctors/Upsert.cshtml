@@ -1,0 +1,77 @@
+﻿@model BuiltCodeWeb.Models.ViewModel.DoctorsVM
+@{
+    var title = "Create Doctor";
+}
+
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Doctor.Id != new Guid())
+        {
+            <input type="hidden" asp-for="Doctor.Id" />
+            <input type="hidden" asp-for="Doctor.DateCreated" />
+            title = "Edit Doctor";
+        }
+        <div class="col-12 p-3">
+            <h2 class="text-primary">@title</h2>
+        </div>
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Marcas</label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.Doctor.PatientId, Model.PatientsList, "- Select the Pacient -", new { @class = "form-control" })
+                    <span asp-validation-for="Doctor.PatientId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Doctor.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input type="text" asp-for="Doctor.Name" class="form-control" />
+                    <span asp-validation-for="Doctor.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Doctor.CRM"></label>
+                </div>
+                <div class="col-8">
+                    <input type="text" asp-for="Doctor.CRM" class="form-control" />
+                    <span asp-validation-for="Doctor.CRM" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Doctor.CRMUF"></label>
+                </div>
+                <div class="col-8">
+                    <input type="text" asp-for="Doctor.CRMUF" class="form-control" />
+                    <span asp-validation-for="Doctor.CRMUF" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4 offset-4">
+                    <button type="submit" class="btn btn-primary form-control">
+                        @if (Model.Doctor.Id != new Guid())
+                        {
+                            <span>Atualizar</span>
+                        }
+                        else
+                        {
+                            <span>Cadastrar</span>
+                        }
+                    </button>
+                </div>
+                <div class="col-4">
+                    <a href="@Url.Action("Index", "Doctors")" class="btn btn-success form-control">Back to Doctor List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
