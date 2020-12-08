@@ -10,21 +10,21 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetPatrimonio(System.Guid)">
+        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetDoctor(System.Guid)">
             <summary>
             Get Individual Doctor
             </summary>
             <param name="id">The id of the Doctor</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetPatrimonioInMarcas(System.Guid)">
+        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetDoctorsInPatients(System.Guid)">
             <summary>
             Get Individual Doctor
             </summary>
             <param name="doctorid">The id of the DoctorId</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.CreatePatrimonio(BuiltCodeAPI.Models.DTOs.DoctorCreateDto)">
+        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.CreateDoctor(BuiltCodeAPI.Models.DTOs.DoctorCreateDto)">
             <summary>
             Create Doctor
             </summary>
@@ -58,14 +58,14 @@
             <param name="id">The id of the Patient</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.PatientsController.CriarPatient(BuiltCodeAPI.Models.Patient)">
+        <member name="M:BuiltCodeAPI.Controllers.PatientsController.CriarPatient(BuiltCodeAPI.Models.DTOs.PatientCreateDto)">
             <summary>
-            CriarMarca
+            Create Patient
             </summary>
-            <param name="patients">Criação de Marcas</param>
+            <param name="patients">Create of Patients</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.PatientsController.UpdatePatient(System.Guid,BuiltCodeAPI.Models.Patient)">
+        <member name="M:BuiltCodeAPI.Controllers.PatientsController.UpdatePatient(System.Guid,BuiltCodeAPI.Models.DTOs.PatientUpdateDto)">
             <summary>
             Update Patient
             </summary>

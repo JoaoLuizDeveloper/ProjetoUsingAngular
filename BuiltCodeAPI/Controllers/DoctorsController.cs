@@ -53,11 +53,11 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id">The id of the Doctor</param>
         /// <returns></returns>
-        [HttpGet("{id:int}", Name = "GetDoctor")]
+        [HttpGet("{id:guid}", Name = "GetDoctor")]
         [ProducesResponseType(200, Type = typeof(Doctor))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public IActionResult GetPatrimonio(Guid id)
+        public IActionResult GetDoctor(Guid id)
         {
             var obj = _doctor.GetDoctor(id);
             if (obj == null)
@@ -76,11 +76,11 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="doctorid">The id of the DoctorId</param>
         /// <returns></returns>
-        [HttpGet("[action]/{doctorid:int}")]
+        [HttpGet("[action]/{doctorid:guid}")]
         [ProducesResponseType(200, Type = typeof(Doctor))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
-        public IActionResult GetPatrimonioInMarcas(Guid doctorid)
+        public IActionResult GetDoctorsInPatients(Guid doctorid)
         {
             var objList = _doctor.GetDoctorsInPatients(doctorid);
             if (objList == null)
@@ -109,7 +109,7 @@ namespace BuiltCodeAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreatePatrimonio([FromBody] DoctorCreateDto doctor)
+        public IActionResult CreateDoctor([FromBody] DoctorCreateDto doctor)
         {
             if (doctor == null)
             {
@@ -143,7 +143,7 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id, doctorsDto">The Doctor</param>
         /// <returns></returns>
-        [HttpPatch("{id:int}", Name = "UpdateDoctor")]
+        [HttpPatch("{id:guid}", Name = "UpdateDoctor")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -170,7 +170,7 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id">The Doctor</param>
         /// <returns></returns>
-        [HttpDelete("{id:int}", Name = "DeleteDoctor")]
+        [HttpDelete("{id:guid}", Name = "DeleteDoctor")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]

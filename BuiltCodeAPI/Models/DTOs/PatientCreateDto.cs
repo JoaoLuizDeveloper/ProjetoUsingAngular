@@ -4,12 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuiltCodeAPI.Models
+namespace BuiltCodeAPI.Models.DTOs
 {
-    public class Patient
+    public class PatientCreateDto
     {
-        [Key]
-        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

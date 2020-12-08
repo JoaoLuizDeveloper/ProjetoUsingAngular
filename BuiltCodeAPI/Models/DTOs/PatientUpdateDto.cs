@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuiltCodeAPI.Models
+namespace BuiltCodeAPI.Models.DTOs
 {
-    public class Patient
+    public class PatientUpdateDto
     {
         [Key]
         public Guid Id { get; set; }

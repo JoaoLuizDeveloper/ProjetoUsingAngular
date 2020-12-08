@@ -10,7 +10,7 @@
     <br />
     <br />
     <div style="background-color:#cde8e2" class="p-3 rounded">
-        <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+        @*<table id="tblData" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr class="table-danger">
                     <th>Marca</th>
@@ -20,10 +20,45 @@
                     <th></th>
                 </tr>
             </thead>
-        </table>
+        </table>*@
+
+        <div data-ng-controller="doctorController">
+            <div class="panel panel-default">
+                <div class="panel-heading">Lista de Doctors</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>{{erro}}</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover" style="width:100%">
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>Name</td>
+                                        <td>CRM</td>
+                                        <td>CRMUF</td>
+                                        <td>Date</td>
+                                    </tr>
+                                    <tr data-ng-repeat="doctor in listadoctors">
+                                        <td>{{doctor.Id}}</td>
+                                        <td>{{doctor.Name}}</td>
+                                        <td>{{doctor.CRM}}</td>
+                                        <td>{{doctor.CRMUF}}</td>
+                                        <td>{{doctor.DateCreated}}</td>
+                                    </tr>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-@section Scripts{
+@*@section Scripts{
     <script src="~/js/patrimonio.js"></script>
-}
+}*@

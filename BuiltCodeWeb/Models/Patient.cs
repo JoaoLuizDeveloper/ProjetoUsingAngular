@@ -14,7 +14,6 @@ namespace BuiltCodeWeb.Models
         public string Name { get; set; }
         [Required]
         public string CPF { get; set; }
-        public byte[] Picture { get; set; }
         [Required]
         public DateTime BirthDate { get; set; }
         public DateTime DateCreated { get; set; }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using BuiltCodeAPI.Models;
 using BuiltCodeAPI.Repository.IRepository;
 using System;
+using BuiltCodeAPI.Models.DTOs;
 
 namespace BuiltCodeAPI.Controllers
 {
@@ -53,7 +54,7 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id">The id of the Patient</param>
         /// <returns></returns>
-        [HttpGet("{id:int}", Name = "GetPatient")]
+        [HttpGet("{id:guid}", Name = "GetPatient")]
         [ProducesResponseType(200, Type = typeof(Patient))]
         [ProducesResponseType(404)]
         [ProducesDefaultResponseType]
@@ -70,18 +71,18 @@ namespace BuiltCodeAPI.Controllers
         }
         #endregion
 
-        #region Criar, Atualizar e Deletar Marca
+        #region Create, Update e Delete Patient
         /// <summary>
-        /// CriarMarca
+        /// Create Patient
         /// </summary>
-        /// <param name="patients">Criação de Marcas</param>
+        /// <param name="patients">Create of Patients</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Patient))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CriarPatient([FromBody] Patient patients)
+        public IActionResult CriarPatient([FromBody] PatientCreateDto patients)
         {
             if (patients == null)
             {
@@ -115,11 +116,11 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id, patientsDto">The Patient</param>
         /// <returns></returns>
-        [HttpPatch("{id:int}", Name = "UpdatePatient")]
+        [HttpPatch("{id:guid}", Name = "UpdatePatient")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdatePatient(Guid id, [FromBody] Patient patientsDto)
+        public IActionResult UpdatePatient(Guid id, [FromBody] PatientUpdateDto patientsDto)
         {
             if (patientsDto == null || id != patientsDto.Id)
             {
@@ -142,7 +143,7 @@ namespace BuiltCodeAPI.Controllers
         /// </summary>
         /// <param name="id">The Doctor</param>
         /// <returns></returns>
-        [HttpDelete("{id:int}", Name = "DeletePatient")]
+        [HttpDelete("{id:guid}", Name = "DeletePatient")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]

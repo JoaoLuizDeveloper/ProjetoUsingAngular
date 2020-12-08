@@ -13,6 +13,8 @@ namespace BuiltCodeAPI.Mapper
         public BuiltCodeMappings()
         {
             CreateMap<Patient, PatientDto>().ReverseMap();
+            CreateMap<Patient, PatientUpdateDto>().ReverseMap();
+            CreateMap<Patient, PatientCreateDto>().ReverseMap();
             CreateMap<Doctor, DoctorDto>().ReverseMap();
             CreateMap<Doctor, DoctorCreateDto>().ReverseMap();
             CreateMap<Doctor, DoctorUpdateDto>().ReverseMap();
