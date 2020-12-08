@@ -1,0 +1,53 @@
+
+<div>
+  <h1>Doctors List</h1>
+  
+  <div class="row">
+    <a class="btn btn-success text-white" href="/">Back To Home</a>&nbsp;&nbsp;
+    <a href="doctor/Upsert" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New Doctor</a>
+  </div>
+</div>
+
+<div class="p-4" style="border-radius:20px;">  
+  <div style="background-color:#cde8e2" class="p-3 rounded">
+    <div data-ng-controller="doctorControllerRead">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <strong>{{erro}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width:100%;color:black;">
+                  <tr>
+                    <td>Id</td>
+                    <td>Name</td>
+                    <td>CRM</td>
+                    <td>CRMUF</td>
+                    <td>Date</td>
+                    <td>Actions</td>
+                  </tr>
+                  <tr *ngFor="let doctor of doctors">
+                    <td>{{doctor.id}}</td>
+                    <td>{{doctor.name}}</td>
+                    <td>{{doctor.crm}}</td>
+                    <td>{{doctor.crmuf}}</td>
+                    <td>{{doctor.dateCreated}}</td>
+                    <td>
+                      <a class='btn btn-success text-white' style='cursor:pointer;'> <i class='far fa-edit'></i></a>
+                      &nbsp;
+                      <a class='btn btn-danger text-white' style='cursor:pointer;'> <i class='far fa-trash-alt'></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

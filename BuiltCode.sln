@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuiltCodeAPI", "BuiltCodeAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuiltCodeWeb", "BuiltCodeWeb\BuiltCodeWeb.csproj", "{788CEF97-EC71-4774-9FCE-079979249EBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuiltCodeAngularPages", "BuiltCodeAngularPages\BuiltCodeAngularPages.csproj", "{E5CADAF7-4B3A-4296-A257-9572A67C2AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuiltCodeAngular", "BuiltCodeAngular\BuiltCodeAngular.csproj", "{AB22AEB6-8528-43B0-A7CA-BC0ABBFC70D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{788CEF97-EC71-4774-9FCE-079979249EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{788CEF97-EC71-4774-9FCE-079979249EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{788CEF97-EC71-4774-9FCE-079979249EBA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5CADAF7-4B3A-4296-A257-9572A67C2AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5CADAF7-4B3A-4296-A257-9572A67C2AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5CADAF7-4B3A-4296-A257-9572A67C2AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5CADAF7-4B3A-4296-A257-9572A67C2AFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB22AEB6-8528-43B0-A7CA-BC0ABBFC70D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB22AEB6-8528-43B0-A7CA-BC0ABBFC70D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB22AEB6-8528-43B0-A7CA-BC0ABBFC70D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB22AEB6-8528-43B0-A7CA-BC0ABBFC70D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
