@@ -32,11 +32,7 @@ namespace BuiltCodeWeb.Repository
             }
 
             var client = _httpClientFactory.CreateClient();
-            if(client != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer");
-            }
-
+            
             HttpResponseMessage response = await client.SendAsync(request);
             if (response.StatusCode == System.Net.HttpStatusCode.Created)
             {
@@ -53,10 +49,7 @@ namespace BuiltCodeWeb.Repository
             var request = new HttpRequestMessage(HttpMethod.Delete, url + Id);
 
             var client = _httpClientFactory.CreateClient();
-            if (client != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer");
-            }
+            
             HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
@@ -73,10 +66,7 @@ namespace BuiltCodeWeb.Repository
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var client = _httpClientFactory.CreateClient();
-            if (client != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer");
-            }
+            
             HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -94,10 +84,7 @@ namespace BuiltCodeWeb.Repository
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url+Id);
             var client = _httpClientFactory.CreateClient();
-            if (client != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer");
-            }
+            
             HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
@@ -125,10 +112,7 @@ namespace BuiltCodeWeb.Repository
             }
 
             var client = _httpClientFactory.CreateClient();
-            if (client != null)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer");
-            }
+            
             HttpResponseMessage response = await client.SendAsync(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)

@@ -17,7 +17,7 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                     <div>
-                        <div class='text-black' style="color:black;>">
+                        <div class='text-black' style="color:black;">
                             ${data}
                         </div>
                     </div>

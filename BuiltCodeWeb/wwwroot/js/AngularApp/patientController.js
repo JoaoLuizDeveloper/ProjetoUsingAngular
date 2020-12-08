@@ -1,54 +1,53 @@
 ﻿var app = angular.module('app', []);
 
-app.controller('doctorControllerRead', ['$scope', '$http', doctorControllerRead]);
-app.controller('doctorControllerCreate', ['$scope', '$http', doctorControllerCreate]);
-app.controller('doctorControllerUpdate', ['$scope', '$http', doctorControllerUpdate]);
-app.controller('doctorControllerDelete', ['$scope', '$http', doctorControllerDelete]);
+app.controller('patientControllerRead', ['$scope', '$http', patientControllerRead]);
+app.controller('patientControllerCreate', ['$scope', '$http', patientControllerCreate]);
+app.controller('patientControllerUpdate', ['$scope', '$http', patientControllerUpdate]);
+app.controller('patientControllerDelete', ['$scope', '$http', patientControllerDelete]);
 
-function doctorControllerRead($scope, $http) {
-
-    $http.get('https://localhost:44387/api/v1/doctors').then(
-        function successCallback(data) {
-            var test = data.data;
-            $scope.listdoctors = data.data;
-        }, function errorCallback(data) {
-            $scope.erro = "Erro: Não foi possivel Listar Doctors";
-        }
-    )
-}
-
-function doctorControllerCreate($scope, $http) {
-
-    $http.post('https://localhost:44387/api/v1/doctors').then(
-        function successCallback(data) {
-            var test = data.data;
-            $scope.listdoctors = data.data;
-        }, function errorCallback(data) {
-            $scope.erro = "Erro: Não foi possivel Listar Doctors";
-        }
-    )
-}
-
-function doctorControllerUpdate($scope, $http) {
+function patientControllerRead($scope, $http) {
 
     $http.get('https://localhost:44387/api/v1/doctors').then(
         function successCallback(data) {
             var test = data.data;
             $scope.listdoctors = data.data;
         }, function errorCallback(data) {
-            $scope.erro = "Erro: Não foi possivel Listar Doctors";
+            $scope.erro = "Erro: Não foi possivel Listar Patients";
         }
     )
 }
 
-function doctorControllerDelete($scope, $http) {
+function patientControllerCreate($scope, $http) {
+    $http.get('https://localhost:44387/api/v1/doctors').then(
+        function successCallback(data) {
+            var test = data.data;
+            $scope.listdoctors = data.data;
+        }, function errorCallback(data) {
+            $scope.erro = "Erro: Não foi possivel Listar Patients";
+        }
+    )
+}
+
+function patientControllerUpdate($scope, $http) {
 
     $http.get('https://localhost:44387/api/v1/doctors').then(
         function successCallback(data) {
             var test = data.data;
             $scope.listdoctors = data.data;
         }, function errorCallback(data) {
-            $scope.erro = "Erro: Não foi possivel Listar Doctors";
+            $scope.erro = "Erro: Não foi possivel Listar Patients";
+        }
+    )
+}
+
+function patientControllerDelete($scope, $http) {
+
+    $http.get('https://localhost:44387/api/v1/doctors').then(
+        function successCallback(data) {
+            var test = data.data;
+            $scope.listdoctors = data.data;
+        }, function errorCallback(data) {
+            $scope.erro = "Erro: Não foi possivel Listar Patients";
         }
     )
 }

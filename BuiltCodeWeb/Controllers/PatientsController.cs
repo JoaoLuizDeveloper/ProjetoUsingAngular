@@ -25,14 +25,7 @@ namespace BuiltCodeWeb.Controllers
         #region Listagem
         public IActionResult Index()
         {
-            return View( new Patient() { });
-        }
-
-        public async Task<IActionResult> GetAllMarcas()
-        {
-            //WorkFlow
-            var model = await _patient.GetAllAsync(SD.PatientAPIPath);
-            return Json(new { data = model });
+            return View();
         }
         #endregion
 
@@ -62,21 +55,6 @@ namespace BuiltCodeWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var files = HttpContext.Request.Form.Files;
-                //if (files.Count > 0)
-                //{
-                //    byte[] p1 = null;
-                //    using (var fs1 = files[0].OpenReadStream())
-                //    {
-                //        using (var ms1 = new MemoryStream())
-                //        {
-                //            fs1.CopyTo(ms1);
-                //            p1 = ms1.ToArray();
-                //        }
-                //    }
-                //    obj.Picture = p1;
-                //}
-
                 if (obj.Id == new Guid())
                 {
                     obj.DateCreated = DateTime.Now;
@@ -98,7 +76,6 @@ namespace BuiltCodeWeb.Controllers
 
         #region Deletar
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var status = await _patient.DeleteAsync(SD.PatientAPIPath, id);

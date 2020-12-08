@@ -30,7 +30,7 @@ namespace BuiltCodeWeb.Controllers
         #region Listagem
         public IActionResult Index()
         {
-            return View( new Doctor() { });
+            return View();
         }
 
         public async Task<IActionResult> GetAllPatrimonios()
@@ -41,6 +41,7 @@ namespace BuiltCodeWeb.Controllers
         #endregion
 
         #region Add e update
+        //[path: 'user/:id/details', component:userComponent, pathMatch: 'full']
         public async Task<IActionResult> Upsert(int? id)
         {
             IEnumerable<Patient> npList = await _patient.GetAllAsync(SD.PatientAPIPath);
@@ -108,7 +109,6 @@ namespace BuiltCodeWeb.Controllers
 
         #region Deletar
         [HttpDelete]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var status = await _doctor.DeleteAsync(SD.DoctorAPIPath, id);
@@ -116,7 +116,7 @@ namespace BuiltCodeWeb.Controllers
             {
                 return Json(new { success = true, message = "Deleted with success!" });
             }
-            return Json(new { success = false, message = "Falha ao deletar!" });
+            return Json(new { success = false, message = "Some error when we try to delete!" });
         }
         #endregion
     }

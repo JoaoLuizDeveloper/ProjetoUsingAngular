@@ -1,7 +1,7 @@
 ﻿<div class="p-4" style="border-radius:20px;">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-primary">Listagem de Patrimonios</h2>
+            <h2 class="text-primary">List of Doctors</h2>
         </div>
         <div class="col-6 text-right">
             <a href="@Url.Action("Upsert", "Doctors")" class="btn btn-primary text-white"><i class="fas fa-plus"></i> &nbsp; Create New Doctor</a>
@@ -22,9 +22,8 @@
             </thead>
         </table>*@
 
-        <div data-ng-controller="doctorController">
+        <div data-ng-controller="doctorControllerRead">
             <div class="panel panel-default">
-                <div class="panel-heading">Lista de Doctors</div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -34,20 +33,26 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" style="width:100%">
+                                <table class="table table-bordered table-striped table-hover" style="width:100%;color:black;">
                                     <tr>
                                         <td>Id</td>
                                         <td>Name</td>
                                         <td>CRM</td>
                                         <td>CRMUF</td>
                                         <td>Date</td>
+                                        <td>Actions</td>
                                     </tr>
-                                    <tr data-ng-repeat="doctor in listadoctors">
-                                        <td>{{doctor.Id}}</td>
-                                        <td>{{doctor.Name}}</td>
-                                        <td>{{doctor.CRM}}</td>
-                                        <td>{{doctor.CRMUF}}</td>
-                                        <td>{{doctor.DateCreated}}</td>
+                                    <tr data-ng-repeat="doctor in listdoctors">
+                                        <td>{{doctor.id}}</td>
+                                        <td>{{doctor.name}}</td>
+                                        <td>{{doctor.crm}}</td>
+                                        <td>{{doctor.crmuf}}</td>
+                                        <td>{{doctor.dateCreated}}</td>
+                                        <td>
+                                            <a [routerLink]="['/doctors', doctor.id, 'Upsert']" class='btn btn-success text-white' style='cursor:pointer;'> <i class='far fa-edit'></i></a>
+                                            &nbsp;
+                                            <a (click)="Delete({{doctor.id}})" class='btn btn-danger text-white' style='cursor:pointer;'> <i class='far fa-trash-alt'></i></a>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>                            
@@ -59,6 +64,37 @@
     </div>
 </div>
 
-@*@section Scripts{
+@section Scripts{
     <script src="~/js/patrimonio.js"></script>
-}*@
+
+<script>
+
+
+
+    function Delete(url) {
+        swal({
+            title: "Are you sure About delete this iten?",
+            text: "I can't be able to recover it after!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmbuttonText: "Yes, delete!",
+            closeOnconfirm: true
+        }, function () {
+            $.ajax({
+                type: 'Delete',
+                url: "/Doctors/Delete/" + url,
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message);
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            });
+        });
+    }
+</script>
+}
