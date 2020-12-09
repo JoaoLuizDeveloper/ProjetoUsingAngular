@@ -1,5 +1,6 @@
 export interface IPatient {
-  id: number;
+  id: BufferSource;
+  name: string;
   cpf: string;
   birthDate: Date;
   datecreated: Date;

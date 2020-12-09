@@ -27,51 +27,54 @@ export class DoctorService {
   }
 
   // Get one Doctor By Id
-  getDoctorById(id: AAGUID): Observable<IDoctor> {
+  getDoctorById(id: BufferSource): Observable<IDoctor> {
     return this.http.get<IDoctor>(this.url + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
+
+  
   // Create one Doctor
   saveDoctor(doctor: IDoctor): Observable<IDoctor> {
-    return this.http.post<IDoctor>(this.url, JSON.stringify(doctor), this.httpOptions)
+    var d = this.http.post<IDoctor>(this.url, JSON.stringify(doctor), this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(this.handleError)
-      )
+      ); 
+    return d;
   }
+
   // Update one Doctor
   updateDoctor(doctor: IDoctor): Observable<IDoctor> {
-    return this.http.put<IDoctor>(this.url + '/' + doctor.id, JSON.stringify(doctor), this.httpOptions)
+    return this.http.patch<IDoctor>(this.url + '/' + doctor.id, JSON.stringify(doctor), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
+
   // delete one Doctor
-  deleteDoctor(doctor: IDoctor) {
-    return this.http.delete<IDoctor>(this.url + '/' + doctor.id, this.httpOptions)
+  deleteDoctor(doctorId: BufferSource) {
+    return this.http.delete<IDoctor>(this.url + '/' + doctorId, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
 
-
-  // Manipulação de erros
+  // Figure out some mistakes
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do client
+      // Client Side Mistake
       errorMessage = error.error.message;
     } else {
-      // Erro ocorreu no lado do servidor
+      // Server Side Mistake
       errorMessage = `Error code: ${error.status}, ` + `message: ${error.message}`;
     }
     console.log(errorMessage);
     return throwError(errorMessage);
   };
-
 }

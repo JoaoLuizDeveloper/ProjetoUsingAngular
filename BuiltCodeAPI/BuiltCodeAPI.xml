@@ -17,13 +17,6 @@
             <param name="id">The id of the Doctor</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetDoctorsInPatients(System.Guid)">
-            <summary>
-            Get Individual Doctor
-            </summary>
-            <param name="doctorid">The id of the DoctorId</param>
-            <returns></returns>
-        </member>
         <member name="M:BuiltCodeAPI.Controllers.DoctorsController.CreateDoctor(BuiltCodeAPI.Models.DTOs.DoctorCreateDto)">
             <summary>
             Create Doctor

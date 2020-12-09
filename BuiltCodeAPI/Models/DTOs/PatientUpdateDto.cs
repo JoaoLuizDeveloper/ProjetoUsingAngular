@@ -17,5 +17,7 @@ namespace BuiltCodeAPI.Models.DTOs
         [Required]
         public DateTime BirthDate { get; set; }
         public DateTime DateCreated { get; set; }
+        [Required]
+        public Guid DoctorId { get; set; }
     }
 }

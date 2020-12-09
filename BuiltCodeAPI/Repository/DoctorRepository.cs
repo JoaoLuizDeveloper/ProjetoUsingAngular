@@ -30,17 +30,17 @@ namespace BuiltCodeAPI.Repository
 
         public Doctor GetDoctor(Guid doctorId)
         {
-            return _db.Doctors.Include(c => c.Patient).FirstOrDefault(n => n.Id == doctorId);
+            return _db.Doctors.FirstOrDefault(n => n.Id == doctorId);
         }
 
         public ICollection<Doctor> GetDoctors()
         {
-            return _db.Doctors.Include(c => c.Patient).OrderBy(n => n.Name).ToList();
+            return _db.Doctors.OrderBy(n => n.Name).ToList();
         }
 
-        public bool DoctorExists(string name)
+        public bool CRMEndExists(string crmEnd)
         {
-            bool value = _db.Doctors.Any(n => n.Name.ToLower().Trim() == name.ToLower().Trim());
+            bool value = _db.Doctors.Any(n => n.CRMEnd.ToLower().Trim() == crmEnd.ToLower().Trim());
             return value;
         }
 
@@ -59,11 +59,6 @@ namespace BuiltCodeAPI.Repository
         {
             _db.Doctors.Update(doctor);
             return Save();
-        }
-
-        public ICollection<Doctor> GetDoctorsInPatients(Guid npId)
-        {
-            return _db.Doctors.Include(c=>c.Patient).Where(c=>c.Id == npId).ToList();
         }
     }
 }

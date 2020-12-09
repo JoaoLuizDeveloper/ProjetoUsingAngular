@@ -1,8 +1,8 @@
 export interface IDoctor {
-  id: number;
+  id: BufferSource;
   name: string;
   crm: string;
   crmuf: string;
   datecreated: Date;
-  patientId: number;
+  patientId: BufferSource;
 }

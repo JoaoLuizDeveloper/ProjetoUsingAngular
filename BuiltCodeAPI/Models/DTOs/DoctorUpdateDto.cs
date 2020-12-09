@@ -18,8 +18,6 @@ namespace BuiltCodeAPI.Models.DTOs
         [Required]
         public string CRMUF { get; set; }
 
-        [Required]
-        public Guid PatientId { get; set; }
 
         public DateTime DateCreated { get; set; }
     }

@@ -70,34 +70,6 @@ namespace BuiltCodeAPI.Controllers
         }
         #endregion
 
-        #region Get Individual Doctor
-        /// <summary>
-        /// Get Individual Doctor
-        /// </summary>
-        /// <param name="doctorid">The id of the DoctorId</param>
-        /// <returns></returns>
-        [HttpGet("[action]/{doctorid:guid}")]
-        [ProducesResponseType(200, Type = typeof(Doctor))]
-        [ProducesResponseType(404)]
-        [ProducesDefaultResponseType]
-        public IActionResult GetDoctorsInPatients(Guid doctorid)
-        {
-            var objList = _doctor.GetDoctorsInPatients(doctorid);
-            if (objList == null)
-            {
-                return NotFound();
-            }
-
-            var objDto = new List<Doctor>();
-            foreach(var obj in objList)
-            {
-                objDto.Add(_mapper.Map<Doctor>(obj));
-            }
-            
-            return Ok(objDto);
-        }
-        #endregion
-
         #region Create, Update and Delete Doctor
         /// <summary>
         /// Create Doctor
@@ -116,18 +88,19 @@ namespace BuiltCodeAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (_doctor.DoctorExists(doctor.Name))
-            {
-                ModelState.AddModelError("", "The Doctor alredy Exist");
-                return StatusCode(404, ModelState);
-            }
-
+            
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             var doctorsObj = _mapper.Map<Doctor>(doctor);
+
+            if (_doctor.CRMEndExists(doctorsObj.CRM + doctorsObj.CRMUF))
+            {
+                ModelState.AddModelError("", "This CRM already Exist");
+                return StatusCode(404, ModelState);
+            }
 
             if (!_doctor.CreateDoctor(doctorsObj))
             {
@@ -155,6 +128,8 @@ namespace BuiltCodeAPI.Controllers
             }
 
             var doctorsObj = _mapper.Map<Doctor>(doctorsDto);
+
+
 
             if (!_doctor.UpdateDoctor(doctorsObj))
             {

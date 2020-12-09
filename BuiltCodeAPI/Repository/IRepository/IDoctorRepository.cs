@@ -9,9 +9,8 @@ namespace BuiltCodeAPI.Repository.IRepository
     public interface IDoctorRepository
     {
         ICollection<Doctor> GetDoctors();
-        ICollection<Doctor> GetDoctorsInPatients(Guid npId);
         Doctor GetDoctor(Guid doctorId);
-        bool DoctorExists(string name);
+        bool CRMEndExists(string crmEnd);
         bool DoctorExists(Guid id);
         bool CreateDoctor(Doctor doctor);
         bool UpdateDoctor(Doctor doctor);

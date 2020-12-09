@@ -15,14 +15,9 @@ namespace BuiltCodeAPI.Models
         public string Name { get; set; }
         [Required]
         public string CRM { get; set; }
+        public string CRMEnd { get; set; }
         [Required]
         public string CRMUF { get; set; }
         public DateTime DateCreated { get; set; }
-
-        [Required]
-        public Guid PatientId { get; set; }
-
-        [ForeignKey("PatientId")]
-        public Patient Patient { get; set; }
     }
 }

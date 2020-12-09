@@ -8,6 +8,7 @@ namespace BuiltCodeAPI.Models.DTOs
 {
     public class PatientCreateDto
     {
+        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -15,5 +16,8 @@ namespace BuiltCodeAPI.Models.DTOs
         [Required]
         public DateTime BirthDate { get; set; }
         public DateTime DateCreated { get; set; }
+
+        [Required]
+        public Guid DoctorId { get; set; }
     }
 }
