@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 export class DoctorComponent implements OnInit {
 
     // Doctor
-   doctor: IDoctor;
+  doctor: IDoctor = <IDoctor>{};
    doctors: IDoctor[];
 
     
@@ -31,13 +31,12 @@ export class DoctorComponent implements OnInit {
       "name": ["", Validators.required],
       "crm": ["", Validators.required],
       "crmuf": ["", Validators.required],
-      "patientId": ["", Validators.required],
     });
     this.formLabel = "Create Doctor";
   }
-    
+     
   ngOnInit() {
-    this.getDoctors();
+    this.getDoctors();    
   }
 
   // Call the service to get all the doctors
@@ -49,11 +48,23 @@ export class DoctorComponent implements OnInit {
     );
   }
 
+  firstCrm($event: KeyboardEvent) {
+    var crm = (<HTMLInputElement>event.target).value;
+    var uf = (<HTMLInputElement>document.getElementById("crmuf")).value;
+    (<HTMLInputElement>document.getElementById("crmfim")).value = crm + '-' + uf;
+  }
+
+  secondCrm($event: KeyboardEvent) {
+    var crm = (<HTMLInputElement>document.getElementById("crm")).value;
+    var uf = (<HTMLInputElement>event.target).value;
+    (<HTMLInputElement>document.getElementById("crmfim")).value = crm + '-' + uf;
+
+  }
+
   onSubmit() {
     this.doctor.name = this.form.controls["name"].value;
     this.doctor.crm = this.form.controls["crm"].value;
     this.doctor.crmuf = this.form.controls["crmuf"].value;
-    this.doctor.patientId = this.form.controls["patientId"].value;
 
     //Create and Update
     if (this.isEditMode) {
@@ -80,7 +91,7 @@ export class DoctorComponent implements OnInit {
     this.form.get("name")!.setValue(doctorForm.name);
     this.form.get("crm")!.setValue(doctorForm.crm);
     this.form.get("crmuf")!.setValue(doctorForm.crmuf);
-    this.form.get("patientId")!.setValue(doctorForm.patientId);    
+    (<HTMLInputElement>document.getElementById("crmfim")).value = doctorForm.crm + '-' + doctorForm.crmuf;
   };
 
   //scroll(el: HTMLElement) {
@@ -95,7 +106,8 @@ export class DoctorComponent implements OnInit {
     this.form.get("name")!.setValue('');
     this.form.get("crm")!.setValue('');
     this.form.get("crmuf")!.setValue('');
-    this.form.get("patientId")!.setValue('');
+    this.form.get("crmfim")!.setValue('');
+    (<HTMLInputElement>document.getElementById("crmfim")).value = '';
   };
 
   //Delete the Doctor

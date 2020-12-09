@@ -4,4 +4,5 @@ export interface IPatient {
   cpf: string;
   birthDate: Date;
   datecreated: Date;
+  doctorId: BufferSource;
 }

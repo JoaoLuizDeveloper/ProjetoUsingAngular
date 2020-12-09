@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuiltCodeAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201207182229_FirstMigrationToDb")]
-    partial class FirstMigrationToDb
+    [Migration("20201209023010_GeneratingDatabase")]
+    partial class GeneratingDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,9 @@ namespace BuiltCodeAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CRMEnd")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CRMUF")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -42,12 +45,7 @@ namespace BuiltCodeAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Doctors");
                 });
@@ -68,23 +66,25 @@ namespace BuiltCodeAPI.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Picture")
-                        .HasColumnType("varbinary(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("BuiltCodeAPI.Models.Doctor", b =>
+            modelBuilder.Entity("BuiltCodeAPI.Models.Patient", b =>
                 {
-                    b.HasOne("BuiltCodeAPI.Models.Patient", "Patient")
+                    b.HasOne("BuiltCodeAPI.Models.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("PatientId")
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

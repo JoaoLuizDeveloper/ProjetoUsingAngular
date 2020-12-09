@@ -1,7 +1,86 @@
 
 <div>
   <h1>Patients List</h1>
-</div>
-<h1>Counter</h1>
 
-<p>This is a simple example of an Angular component.</p>
+  <div class="row">
+    <a class="btn btn-success text-white" href="/">Back To Home</a>&nbsp;&nbsp;
+  </div>
+</div>
+
+<div class="p-4" style="border-radius:20px;">
+  <div style="background-color:#cde8e2" class="p-3 rounded">
+    <div data-ng-controller="doctorControllerRead">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <strong>{{erro}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width:100%;color:black;">
+                  <tr>
+                    <td>Name</td>
+                    <td>CPF</td>
+                    <td>Birth Date</td>
+                    <td>Date</td>
+                    <td>Actions</td>
+                  </tr>
+                  <tr *ngFor="let patient of patients">
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.cpf}}</td>
+                    <td>{{patient.birthDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{patient.dateCreated | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                      <a (click)="edit(patient)" class='btn btn-success text-white' style='cursor:pointer;'> <i class='fa fa-pencil-square-o'></i></a>
+                      &nbsp;
+                      <a (click)="delete(patient)" class='btn btn-danger text-white' style='cursor:pointer;'> <i class='fa fa-trash'></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create and Update-->
+
+<section id="secForm">
+  <div class="card add-doctor">
+    <h5 class="card-header">{{ formLabel }}</h5>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" formControlName="name" required class="form-control" placeholder="Type the name of Patient">
+        </div>
+
+        <div class="form-group">
+          <label for="doctorId">Doctor</label>
+          <select  class="form-control" name="doctorId" id="doctorId" formControlName="doctorId">
+            <option *ngFor="let doctor of doctors" value="{{doctor.id}}">{{doctor.name}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input type="text" formControlName="cpf" id="cpf" name="cpf" required class="form-control" placeholder="___.___.___-__" (focusout)="verificarCpf($event)" mask="000.000.000-99">
+        </div>
+
+        <div class="form-group">
+          <label for="birthDate">Birth Date</label>
+          <input type="date" formControlName="birthDate" required class="form-control" placeholder="Type the Birth Date">
+
+        </div>
+        <button type="submit" class="btn btn-primary btn-add-doctor" [disabled]="!form.valid">Salvar</button>&nbsp;&nbsp;
+        <button type="reset" class="btn btn-secondary btn-add-doctor" (click)="cancel()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,7 @@
 import { Injectable, Component, Pipe, Directive } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse  } from '@angular/common/http';
 import { IPatient } from '../Models/patient.interface';
+import { IDoctor } from '../Models/doctor.interface';
 import { map, catchError, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
@@ -21,8 +22,26 @@ export class PatientService {
   getPatients(): Observable<IPatient[]> {
     return this.http.get<IPatient[]>(this.url)
       .pipe(
+        retry(1),
+        catchError(this.handleError));
+  }
+
+  getsearchCpf(cpf: number) {
+    var patient = this.http.get<IPatient[]>(this.url + '/' + cpf, this.httpOptions)
+      .pipe(
         retry(2),
         catchError(this.handleError));
+    
+    return patient;
+  }
+
+  // Get all the doctors
+  getDoctors(): Observable<IDoctor[]> {
+    var retorno = this.http.get<IDoctor[]>(this.url)
+      .pipe(
+        retry(1),
+        catchError(this.handleError));
+    return retorno;
   }
 
   // Get one Doctor By Id
@@ -35,8 +54,8 @@ export class PatientService {
   }
 
   // Create one Doctor
-  savePatient(doctor: IPatient): Observable<IPatient> {
-    return this.http.post<IPatient>(this.url, JSON.stringify(doctor), this.httpOptions)
+  savePatient(patient: IPatient): Observable<IPatient> {
+    return this.http.post<IPatient>(this.url, JSON.stringify(patient), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -45,7 +64,7 @@ export class PatientService {
 
   // Update one Doctor
   updatePatient(patient: IPatient): Observable<IPatient> {
-    return this.http.put<IPatient>(this.url + '/' + patient.id, JSON.stringify(patient), this.httpOptions)
+    return this.http.patch<IPatient>(this.url + '/' + patient.id, JSON.stringify(patient), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

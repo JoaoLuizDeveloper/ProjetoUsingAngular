@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BuiltCodeAPI.Models;
-using BuiltCodeAPI.Models.DTOs;
 using BuiltCodeAPI.Repository.IRepository;
+using BuiltCodeAPI.Models.DTOs;
 
 namespace BuiltCodeAPI.Controllers
 {
@@ -17,11 +17,13 @@ namespace BuiltCodeAPI.Controllers
     {
         #region Construtor/Injection
         private readonly IDoctorRepository _doctor;
+        private readonly IPatientRepository _patient;
         private readonly IMapper _mapper;
 
-        public DoctorsController(IDoctorRepository doctor, IMapper mapper)
+        public DoctorsController(IDoctorRepository doctor, IMapper mapper, IPatientRepository patient)
         {
             _doctor = doctor;
+            _patient = patient;
             _mapper = mapper;
         }
         #endregion
@@ -33,7 +35,8 @@ namespace BuiltCodeAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type= typeof(List<Doctor>))]
-        public IActionResult GetPatrimonios()
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetDoctors()
         {
             var objList = _doctor.GetDoctors();
             var objDTo = new List<Doctor>();
@@ -56,6 +59,7 @@ namespace BuiltCodeAPI.Controllers
         [HttpGet("{id:guid}", Name = "GetDoctor")]
         [ProducesResponseType(200, Type = typeof(Doctor))]
         [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesDefaultResponseType]
         public IActionResult GetDoctor(Guid id)
         {
@@ -87,7 +91,6 @@ namespace BuiltCodeAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             
             if(!ModelState.IsValid)
             {
@@ -102,13 +105,15 @@ namespace BuiltCodeAPI.Controllers
                 return StatusCode(404, ModelState);
             }
 
+            doctorsObj.CRMEnd = doctorsObj.CRM + doctorsObj.CRMUF;
+
             if (!_doctor.CreateDoctor(doctorsObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when you trying to save {doctor.Name}");
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetPatrimonio", new { version = HttpContext.GetRequestedApiVersion().ToString(), id = doctorsObj.Id }, doctorsObj);
+            return CreatedAtRoute("GetDoctor", new { version = HttpContext.GetRequestedApiVersion().ToString(), id = doctorsObj.Id }, doctorsObj);
         }
 
         /// <summary>
@@ -128,8 +133,18 @@ namespace BuiltCodeAPI.Controllers
             }
 
             var doctorsObj = _mapper.Map<Doctor>(doctorsDto);
+            doctorsObj.CRMEnd = doctorsObj.CRM + doctorsObj.CRMUF;
 
+            if (_doctor.CRMEndExists(doctorsObj.CRM + doctorsObj.CRMUF))
+            {
+                var objeto = _doctor.GetDoctor(id);
 
+                if(objeto.CRMEnd != doctorsObj.CRMEnd)
+                {
+                    ModelState.AddModelError("", "This CRM already Exist");
+                    return StatusCode(404, ModelState);
+                }                
+            }
 
             if (!_doctor.UpdateDoctor(doctorsObj))
             {
@@ -158,6 +173,12 @@ namespace BuiltCodeAPI.Controllers
             }
 
             var doctorsDto = _doctor.GetDoctor(id);
+
+            if (!_patient.PatientExistsByDoctor(id))
+            {
+                ModelState.AddModelError("", "This Doctor have One or more Patients");
+                return StatusCode(404, ModelState);
+            }
 
             if (!_doctor.DeleteDoctor(doctorsDto))
             {

@@ -37,13 +37,12 @@ export class DoctorService {
 
   
   // Create one Doctor
-  saveDoctor(doctor: IDoctor): Observable<IDoctor> {
-    var d = this.http.post<IDoctor>(this.url, JSON.stringify(doctor), this.httpOptions)
+  saveDoctor(doctor: IDoctor): Observable<IDoctor> { 
+    return this.http.post<IDoctor>(this.url, JSON.stringify(doctor), this.httpOptions)
       .pipe(
-        retry(1),
+        retry(2),
         catchError(this.handleError)
-      ); 
-    return d;
+      );
   }
 
   // Update one Doctor

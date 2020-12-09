@@ -4,5 +4,4 @@ export interface IDoctor {
   crm: string;
   crmuf: string;
   datecreated: Date;
-  patientId: BufferSource;
 }

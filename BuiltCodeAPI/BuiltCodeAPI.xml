@@ -4,7 +4,7 @@
         <name>BuiltCodeAPI</name>
     </assembly>
     <members>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetPatrimonios">
+        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.GetDoctors">
             <summary>
             Get List of Doctors
             </summary>
@@ -51,7 +51,7 @@
             <param name="id">The id of the Patient</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.PatientsController.CriarPatient(BuiltCodeAPI.Models.DTOs.PatientCreateDto)">
+        <member name="M:BuiltCodeAPI.Controllers.PatientsController.CreatePatient(BuiltCodeAPI.Models.DTOs.PatientCreateDto)">
             <summary>
             Create Patient
             </summary>
@@ -70,6 +70,13 @@
             Delete Patient
             </summary>
             <param name="id">The Doctor</param>
+            <returns></returns>
+        </member>
+        <member name="M:BuiltCodeAPI.Controllers.PatientsController.SearchCpf(System.Int64)">
+            <summary>
+            The Patient CPF
+            </summary>
+            <param name="cpf">The Patient CPF</param>
             <returns></returns>
         </member>
         <member name="M:BuiltCodeAPI.Controllers.PatientsV2Controller.GetFirstPatient">

@@ -2,7 +2,7 @@
 
 namespace BuiltCodeAPI.Migrations
 {
-    public partial class addnewTablesToDb : Migration
+    public partial class GeneratingDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

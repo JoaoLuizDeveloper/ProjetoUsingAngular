@@ -17,6 +17,7 @@ namespace BuiltCodeAPI.Repository
         }
         public bool CreatePatient(Patient patient)
         {
+            patient.DateCreated = DateTime.Now;
             _db.Patients.Add(patient);
             return Save();
         }
@@ -42,10 +43,23 @@ namespace BuiltCodeAPI.Repository
             bool value = _db.Patients.Any(n => n.Name.ToLower().Trim() == name.ToLower().Trim());
             return value;
         }
+        
+        public ICollection<Patient> PatientCPFExists(long cpf)
+        {
+
+            ICollection<Patient> value = _db.Patients.Where(n => n.CPF.Replace(".","").Replace("-","").ToLower().Trim() == cpf.ToString().ToLower().Trim()).ToList();
+            return value;
+        }
 
         public bool PatientExists(Guid id)
         {
             bool value = _db.Patients.Any(n => n.Id == id);
+            return value;
+        }
+        
+        public bool PatientExistsByDoctor(Guid id)
+        {
+            bool value = _db.Patients.Any(n => n.DoctorId == id);
             return value;
         }
 

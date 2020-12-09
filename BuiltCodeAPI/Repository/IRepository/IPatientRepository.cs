@@ -12,6 +12,8 @@ namespace BuiltCodeAPI.Repository.IRepository
         Patient GetPatient(Guid patientsId);
         bool PatientExists(string name);
         bool PatientExists(Guid id);
+        bool PatientExistsByDoctor(Guid id);
+        ICollection<Patient> PatientCPFExists(long cpf);
         bool CreatePatient(Patient patient);
         bool UpdatePatient(Patient patient);
         bool DeletePatient(Patient patient);

@@ -9,6 +9,9 @@ import { HomeComponent } from './home/home.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { PatientComponent } from './patient/patient.component';
 import { CommonModule } from '@angular/common';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 //import { DoctorCrUpComponent } from './doctor/doctorCrUp.component';
 //import { PatientCrUpComponent } from './patient/patientCrUp.component';
 
@@ -30,6 +33,8 @@ import { throwError } from 'rxjs/internal/observable/throwError';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     CommonModule,
+    AngularFontAwesomeModule,
+    NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([

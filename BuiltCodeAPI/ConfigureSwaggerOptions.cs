@@ -29,9 +29,7 @@ namespace BuiltCodeAPI
                         Version = desc.ApiVersion.ToString(),
                     });
             }
-
-            
-
+                      
             var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlCommentFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
             options.IncludeXmlComments(xmlCommentFullPath);

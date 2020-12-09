@@ -11,7 +11,6 @@ using BuiltCodeAPI.Models.DTOs;
 namespace BuiltCodeAPI.Controllers
 {
     [Route("api/v{version:apiversion}/patients")]
-    [ApiVersion("1.0")]
     [ApiController]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class PatientsController : ControllerBase
@@ -34,6 +33,7 @@ namespace BuiltCodeAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(200, Type= typeof(List<Patient>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetPatients()
         {
             var objList = _patients.GetPatients();
@@ -57,6 +57,7 @@ namespace BuiltCodeAPI.Controllers
         [HttpGet("{id:guid}", Name = "GetPatient")]
         [ProducesResponseType(200, Type = typeof(Patient))]
         [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesDefaultResponseType]
         public IActionResult GetPatient(Guid id)
         {
@@ -82,7 +83,7 @@ namespace BuiltCodeAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CriarPatient([FromBody] PatientCreateDto patients)
+        public IActionResult CreatePatient([FromBody] PatientCreateDto patients)
         {
             if (patients == null)
             {
@@ -108,7 +109,7 @@ namespace BuiltCodeAPI.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetMarca", new { version=HttpContext.GetRequestedApiVersion().ToString(), id= patientObj.Id }, patientObj);
+            return CreatedAtRoute("GetPatient", new { version=HttpContext.GetRequestedApiVersion().ToString(), id= patientObj.Id }, patientObj);
         }
 
         /// <summary>
@@ -166,5 +167,31 @@ namespace BuiltCodeAPI.Controllers
             return NoContent();
         }
         #endregion
+
+
+        /// <summary>
+        /// The Patient CPF
+        /// </summary>
+        /// <param name="cpf">The Patient CPF</param>
+        /// <returns></returns>
+        [ProducesResponseType(200, Type = typeof(Patient))]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesDefaultResponseType]
+        [HttpGet("{cpf:long}", Name = "SearchCpf")]
+        public IActionResult SearchCpf(long cpf)
+        {
+            if (cpf > 0)
+            {
+                var cli = _patients.PatientCPFExists(cpf);
+
+                if (cli != null && cli.Count > 0)
+                {
+                    return Ok(cli);
+                }
+            }
+
+            return NotFound();
+        }
     }
 }
