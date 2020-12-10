@@ -119,26 +119,26 @@ namespace BuiltCodeAPI.Controllers
         /// <summary>
         /// Update Doctor
         /// </summary>
-        /// <param name="id, doctorsDto">The Doctor</param>
+        /// <param name="doctorsDto">The Doctor</param>
         /// <returns></returns>
-        [HttpPatch("{id:guid}", Name = "UpdateDoctor")]
+        [HttpPatch(Name = "UpdateDoctor")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateDoctor(Guid id, [FromBody] DoctorUpdateDto doctorsDto)
+        public IActionResult UpdateDoctor([FromBody] DoctorUpdateDto doctorsDto)
         {
-            if (doctorsDto == null || id != doctorsDto.Id)
+            if (doctorsDto == null)
             {
                 return BadRequest(ModelState);
             }
 
+            var objeto = _doctor.GetDoctor(doctorsDto.Id);
             var doctorsObj = _mapper.Map<Doctor>(doctorsDto);
-            doctorsObj.CRMEnd = doctorsObj.CRM + doctorsObj.CRMUF;
+
+            doctorsObj.CRMEnd = doctorsObj.CRM + "-" + doctorsObj.CRMUF;
 
             if (_doctor.CRMEndExists(doctorsObj.CRM + doctorsObj.CRMUF))
             {
-                var objeto = _doctor.GetDoctor(id);
-
                 if(objeto.CRMEnd != doctorsObj.CRMEnd)
                 {
                     ModelState.AddModelError("", "This CRM already Exist");
@@ -146,7 +146,7 @@ namespace BuiltCodeAPI.Controllers
                 }                
             }
 
-            if (!_doctor.UpdateDoctor(doctorsObj))
+            if (!_doctor.UpdateDoctor(objeto))
             {
                 ModelState.AddModelError("", $"Something went wrong when you trying to updating {doctorsDto.Name}");
                 return StatusCode(500, ModelState);
@@ -174,7 +174,7 @@ namespace BuiltCodeAPI.Controllers
 
             var doctorsDto = _doctor.GetDoctor(id);
 
-            if (!_patient.PatientExistsByDoctor(id))
+            if (_patient.PatientExistsByDoctor(id))
             {
                 ModelState.AddModelError("", "This Doctor have One or more Patients");
                 return StatusCode(404, ModelState);

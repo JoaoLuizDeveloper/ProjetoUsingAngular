@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BuiltCodeAPI.Models;
 using BuiltCodeAPI.Repository.IRepository;
+using System;
 
 namespace BuiltCodeAPI.Controllers
 {
@@ -26,18 +27,26 @@ namespace BuiltCodeAPI.Controllers
         }
         #endregion
 
-        #region Pegar Marcas
+        #region Get Patients By Doctor
         /// <summary>
-        /// Get First Patient
+        /// Get Patients By Doctor
         /// </summary>
+        /// <param name="doctorid">The id of the Doctor</param>
         /// <returns></returns>
-        [HttpGet]
-        [ProducesResponseType(200, Type= typeof(List<Patient>))]
-        public IActionResult GetFirstPatient()
+        [HttpGet("{doctorid:guid}", Name = "GetPatientsByDoctor")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesDefaultResponseType]
+        public IActionResult GetPatientsByDoctor(Guid doctorid)
         {
-            var obj = _patients.GetPatients().FirstOrDefault();
+            var obj = _patients.GetPatientsByDoctor(doctorid);
+            if (obj == null)
+            {
+                return NotFound();
+            }
 
-            return Ok(_mapper.Map<Patient>(obj));
+            return Ok(obj);
         }
         #endregion
     }

@@ -47,7 +47,7 @@ export class DoctorService {
 
   // Update one Doctor
   updateDoctor(doctor: IDoctor): Observable<IDoctor> {
-    return this.http.patch<IDoctor>(this.url + '/' + doctor.id, JSON.stringify(doctor), this.httpOptions)
+    return this.http.patch<IDoctor>(this.url + '/' , JSON.stringify(doctor), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

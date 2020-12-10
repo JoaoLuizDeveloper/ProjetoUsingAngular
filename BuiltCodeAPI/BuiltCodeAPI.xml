@@ -24,11 +24,11 @@
             <param name="doctor">The Doctor</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.UpdateDoctor(System.Guid,BuiltCodeAPI.Models.DTOs.DoctorUpdateDto)">
+        <member name="M:BuiltCodeAPI.Controllers.DoctorsController.UpdateDoctor(BuiltCodeAPI.Models.DTOs.DoctorUpdateDto)">
             <summary>
             Update Doctor
             </summary>
-            <param name="id, doctorsDto,doctorsDto">The Doctor</param>
+            <param name="doctorsDto">The Doctor</param>
             <returns></returns>
         </member>
         <member name="M:BuiltCodeAPI.Controllers.DoctorsController.DeleteDoctor(System.Guid)">
@@ -58,11 +58,11 @@
             <param name="patients">Create of Patients</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.PatientsController.UpdatePatient(System.Guid,BuiltCodeAPI.Models.DTOs.PatientUpdateDto)">
+        <member name="M:BuiltCodeAPI.Controllers.PatientsController.UpdatePatient(BuiltCodeAPI.Models.DTOs.PatientUpdateDto)">
             <summary>
             Update Patient
             </summary>
-            <param name="id, patientsDto,patientsDto">The Patient</param>
+            <param name="patientsDto">The Patient Updated</param>
             <returns></returns>
         </member>
         <member name="M:BuiltCodeAPI.Controllers.PatientsController.DeletePatient(System.Guid)">
@@ -79,10 +79,11 @@
             <param name="cpf">The Patient CPF</param>
             <returns></returns>
         </member>
-        <member name="M:BuiltCodeAPI.Controllers.PatientsV2Controller.GetFirstPatient">
+        <member name="M:BuiltCodeAPI.Controllers.PatientsV2Controller.GetPatientsByDoctor(System.Guid)">
             <summary>
-            Get First Patient
+            Get Patients By Doctor
             </summary>
+            <param name="doctorid">The id of the Doctor</param>
             <returns></returns>
         </member>
     </members>

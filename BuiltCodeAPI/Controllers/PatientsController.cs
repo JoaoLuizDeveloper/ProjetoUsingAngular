@@ -71,7 +71,7 @@ namespace BuiltCodeAPI.Controllers
             return Ok(objDTO);
         }
         #endregion
-
+        
         #region Create, Update e Delete Patient
         /// <summary>
         /// Create Patient
@@ -115,15 +115,15 @@ namespace BuiltCodeAPI.Controllers
         /// <summary>
         /// Update Patient
         /// </summary>
-        /// <param name="id, patientsDto">The Patient</param>
+        /// <param name="patientsDto">The Patient Updated</param>
         /// <returns></returns>
-        [HttpPatch("{id:guid}", Name = "UpdatePatient")]
+        [HttpPatch(Name = "UpdatePatient")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdatePatient(Guid id, [FromBody] PatientUpdateDto patientsDto)
+        public IActionResult UpdatePatient([FromBody] PatientUpdateDto patientsDto)
         {
-            if (patientsDto == null || id != patientsDto.Id)
+            if (patientsDto == null)
             {
                 return BadRequest(ModelState);
             }

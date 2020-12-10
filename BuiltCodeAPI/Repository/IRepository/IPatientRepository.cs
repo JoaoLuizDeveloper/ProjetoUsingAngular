@@ -9,6 +9,7 @@ namespace BuiltCodeAPI.Repository.IRepository
     public interface IPatientRepository
     {
         ICollection<Patient> GetPatients();
+        ICollection<Patient> GetPatientsByDoctor(Guid id);
         Patient GetPatient(Guid patientsId);
         bool PatientExists(string name);
         bool PatientExists(Guid id);

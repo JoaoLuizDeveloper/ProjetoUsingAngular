@@ -8,7 +8,6 @@ namespace BuiltCodeAPI.Models.DTOs
 {
     public class PatientCreateDto
     {
-        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

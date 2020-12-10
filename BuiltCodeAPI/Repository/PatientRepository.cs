@@ -37,6 +37,11 @@ namespace BuiltCodeAPI.Repository
         {
             return _db.Patients.OrderBy(n => n.Name).ToList();
         }
+        
+        public ICollection<Patient> GetPatientsByDoctor(Guid id)
+        {
+            return _db.Patients.Where(x=>x.DoctorId == id).OrderBy(n => n.Name).ToList();
+        }
 
         public bool PatientExists(string name)
         {

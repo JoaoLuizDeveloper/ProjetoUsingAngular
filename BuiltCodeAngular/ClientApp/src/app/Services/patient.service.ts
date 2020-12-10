@@ -26,6 +26,14 @@ export class PatientService {
         catchError(this.handleError));
   }
 
+  // Get Patient By Doctor
+  getPatientByDoctor(doctorId): Observable<IPatient[]> {
+    return this.http.get<IPatient[]>('https://localhost:44387/api/v2/patients' + '/' + doctorId, this.httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError));
+  }
+
   getsearchCpf(cpf: number) {
     var patient = this.http.get<IPatient[]>(this.url + '/' + cpf, this.httpOptions)
       .pipe(
@@ -64,7 +72,7 @@ export class PatientService {
 
   // Update one Doctor
   updatePatient(patient: IPatient): Observable<IPatient> {
-    return this.http.patch<IPatient>(this.url + '/' + patient.id, JSON.stringify(patient), this.httpOptions)
+    return this.http.patch<IPatient>(this.url + '/', JSON.stringify(patient), this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

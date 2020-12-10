@@ -3,6 +3,6 @@ export interface IPatient {
   name: string;
   cpf: string;
   birthDate: Date;
-  datecreated: Date;
+  dateCreated: Date;
   doctorId: BufferSource;
 }

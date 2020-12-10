@@ -1,0 +1,51 @@
+
+<div>
+  <h1>Patients List</h1>
+
+  <div class="row">
+    <a class="btn btn-success text-white" href="/">Back To Home</a>&nbsp;&nbsp;
+    <a class="btn btn-primary" [routerLink]="['/patientCrUp']" [routerLinkActive]="['link-active']"> <i class="fa fa-plus"></i> Create Patients</a>
+  </div>
+</div>
+
+<div class="p-4" style="border-radius:20px;">
+  <div style="background-color:#cde8e2" class="p-3 rounded">
+    <div data-ng-controller="doctorControllerRead">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <strong>{{erro}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width:100%;color:black;">
+                  <tr>
+                    <td>Name</td>
+                    <td>CPF</td>
+                    <td>Birth Date</td>
+                    <td>Date</td>
+                    <td>Actions</td>
+                  </tr>
+                  <tr *ngFor="let patient of patients">
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.cpf}}</td>
+                    <td>{{patient.birthDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{patient.dateCreated | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                      <a [routerLink]="['/patientCrUp', patient.id]" [routerLinkActive]="['link-active']" class='btn btn-success text-white' style='cursor:pointer;'> <i class='fa fa-pencil-square-o'></i></a>
+                      &nbsp;
+                      <a (click)="delete(patient)" class='btn btn-danger text-white' style='cursor:pointer;'> <i class='fa fa-trash'></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

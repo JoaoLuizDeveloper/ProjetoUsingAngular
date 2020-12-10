@@ -10,6 +10,7 @@ namespace BuiltCodeAPI.Models.DTOs
 {
     public class DoctorUpdateDto
     {
+        [Key]
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }

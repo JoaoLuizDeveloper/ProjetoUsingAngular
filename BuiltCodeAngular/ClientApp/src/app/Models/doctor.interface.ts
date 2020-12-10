@@ -3,5 +3,5 @@ export interface IDoctor {
   name: string;
   crm: string;
   crmuf: string;
-  datecreated: Date;
+  dateCreated: Date;
 }

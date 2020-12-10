@@ -1,0 +1,54 @@
+
+<div>
+  <h1>Doctors List</h1>
+
+  <div class="row">
+    <a class="btn btn-success text-white" href="/">Back To Home</a>&nbsp;&nbsp;
+    <a class="btn btn-primary" [routerLink]="['/doctorCrUp']" [routerLinkActive]="['link-active']"> <i class="fa fa-plus"></i> Create Doctors</a>&nbsp;&nbsp;
+    <a class="btn btn-primary" [routerLink]="['/patientMedico']" [routerLinkActive]="['link-active']"> <i class="fa fa-address-book-o" aria-hidden="true"></i> Patients By Doctor</a>
+  </div>
+</div>
+
+<div class="p-4" style="border-radius:20px;">
+  <div style="background-color:#cde8e2" class="p-3 rounded">
+    <div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <strong>{{erro}}</strong>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover" style="width:100%;color:black;">
+                  <tr>
+                    <td>Name</td>
+                    <td>CRM</td>
+                    <td>CRM-UF</td>
+                    <td>Date</td>
+                    <td>Actions</td>
+                  </tr>
+                  <tr *ngFor="let doctor of doctors">
+                    <td>{{doctor.name}}</td>
+                    <td>{{doctor.crm}}</td>
+                    <td>{{doctor.crmuf}}</td>
+                    <td>{{doctor.dateCreated | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                      <a [routerLink]="['/doctorCrUp', doctor.id]" [routerLinkActive]="['link-active']" class='btn btn-success text-white' style='cursor:pointer;'> <i class='fa fa-pencil-square-o'></i></a>
+                      &nbsp;
+                      <a (click)="delete(doctor)" class='btn btn-danger text-white' style='cursor:pointer;'> <i class='fa fa-trash'></i></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
