@@ -28,7 +28,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     PatientComponent,
     PatientMedicoComponent,
     DoctorCrUpComponent,
-    PatientCrUpComponent
+    PatientCrUpComponent,
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
