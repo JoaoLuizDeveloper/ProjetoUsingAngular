@@ -47,10 +47,8 @@ Swagger for API documentation
 🚀 Getting Started
 Clone the repository:
 
-bash
-Copy
-Edit
 git clone https://github.com/JoaoLuizDeveloper/ProjetoUsingAngular.git
+<br />
 cd ProjetoUsingAngular
 Set up the backend:
 
@@ -60,15 +58,9 @@ Update the appsettings.json with your SQL Server connection string.
 
 Apply migrations and update the database:
 
-bash
-Copy
-Edit
 dotnet ef database update
 Run the API:
 
-bash
-Copy
-Edit
 dotnet run
 The API will be available at http://localhost:5000.
 
@@ -78,15 +70,9 @@ Navigate to the BuiltCodeAngular directory.
 
 Install dependencies:
 
-bash
-Copy
-Edit
 npm install
 Run the Angular application:
 
-bash
-Copy
-Edit
 ng serve
 The frontend will be available at http://localhost:4200.
 
