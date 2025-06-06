@@ -12,3 +12,79 @@
 + <h3> Techs: .Net, SqlServer, ApiRestfull, Swagger, Angular, Repository pattern , Github, bootstrap, javascript, css.
 + <h3> Vídeo:  </h3>
 + <h3> Linkedin: https://www.linkedin.com/in/joaoluizdeveloper/ </h3>
+
+
+
+Built Code – .NET Developer Test Project
+A personal project by João Luiz designed to demonstrate proficiency in full-stack development using ASP.NET Core and Angular. The project includes a RESTful API backend and a responsive Angular frontend.
+
+📁 Project Structure
+BuiltCodeAPI/: ASP.NET Core Web API backend.
+
+BuiltCodeAngular/: Angular frontend application.
+
+BuiltCodeAngularPages/: Angular components and pages.
+
+BuiltCodeWeb/: Web interface integrating frontend and backend.
+
+Testes/: Test projects for validating application functionality.
+
+BuiltCode.sln: Visual Studio solution file.
+
+🛠️ Technologies Used
+ASP.NET Core
+
+Angular
+
+SQL Server
+
+Swagger for API documentation
+
+🚀 Getting Started
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/JoaoLuizDeveloper/ProjetoUsingAngular.git
+cd ProjetoUsingAngular
+Set up the backend:
+
+Navigate to the BuiltCodeAPI directory.
+
+Update the appsettings.json with your SQL Server connection string.
+
+Apply migrations and update the database:
+
+bash
+Copy
+Edit
+dotnet ef database update
+Run the API:
+
+bash
+Copy
+Edit
+dotnet run
+The API will be available at http://localhost:5000.
+
+Set up the frontend:
+
+Navigate to the BuiltCodeAngular directory.
+
+Install dependencies:
+
+bash
+Copy
+Edit
+npm install
+Run the Angular application:
+
+bash
+Copy
+Edit
+ng serve
+The frontend will be available at http://localhost:4200.
+
+📄 License
+This project is licensed under the MIT License.
